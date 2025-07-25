@@ -37,3 +37,4 @@ function loadBooks() {
 
 // Load books when the page loads
 window.onload = loadBooks;
+window.onload = loadBooks;
