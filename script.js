@@ -48,7 +48,7 @@ function loadLibrary(library) {
                     books = results.data.map(row => ({
                         title: row['Title'] || '',
                         author: row['Author'] || '',
-                        pubYear: row['First Publication Year'] || '',
+                        pubYear: row['Original Publication Year'] || '',
                         dateRead: row['Date Read'] ? new Date(row['Date Read']).getFullYear() : ''
                     }));
                     // Reset filter input
