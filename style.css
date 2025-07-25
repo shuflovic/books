@@ -26,6 +26,7 @@ th, td {
 th {
     background-color: #4CAF50;
     color: white;
+    cursor: pointer; /* Indicate clickable headers */
 }
 
 tr:nth-child(even) {
@@ -34,4 +35,24 @@ tr:nth-child(even) {
 
 tr:hover {
     background-color: #ddd;
+}
+
+/* Style for sortable headers */
+.sortable::after {
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+/* Ascending sort arrow */
+.sorted-asc::after {
+    content: '↑';
+}
+
+/* Descending sort arrow */
+.sorted-desc::after {
+    content: '↓';
 }
