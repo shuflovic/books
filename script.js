@@ -18,8 +18,26 @@ function displayBooks() {
 }
 
 // Function to load and display the CSV data
-function loadBooks() {
-    fetch('goodreads_export.csv')
+function loadLibrary(library) {
+    // Update active button
+    document.querySelectorAll('.library-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('onclick') === `loadLibrary('${library}')`) {
+            btn.classList.add('active');
+        }
+    });
+
+    // Determine CSV file based on library
+    let csvFile;
+    if (library === 'pavel') {
+        csvFile = 'goodreads_export.csv';
+    } else if (library === 'daniela') {
+        csvFile = 'goodreads_export_daniela.csv';
+    } else if (library === 'library') {
+        csvFile = 'kniznica.csv';
+    }
+
+    fetch(csvFile)
         .then(response => response.text())
         .then(data => {
             // Parse CSV data with Papa Parse
@@ -30,15 +48,17 @@ function loadBooks() {
                     books = results.data.map(row => ({
                         title: row['Title'] || '',
                         author: row['Author'] || '',
-                        pubYear: row['Original Publication Year'] || '',
+                        pubYear: row['First Publication Year'] || '',
                         dateRead: row['Date Read'] ? new Date(row['Date Read']).getFullYear() : ''
                     }));
-                    displayBooks(); // Display books initially
+                    // Reset filter input
+                    document.getElementById('filterInput').value = '';
+                    filterBooks(); // Apply filter (empty initially)
                 }
             });
         })
         .catch(error => console.error('Error loading CSV:', error));
 }
 
-// Load books when the page loads
-window.onload = loadBooks;
+// Load Pavel's books by default when the page loads
+window.onload = () => loadLibrary('pavel');
