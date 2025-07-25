@@ -45,7 +45,12 @@ function loadLibrary(library) {
                 header: true,
                 skipEmptyLines: true,
                 complete: function(results) {
-                    books = results.data.map(row => ({
+                    books = results.data
+                        .filter(row => {
+                            const bookshelf = (row['Bookshelves with positions'] || '').toLowerCase();
+                            return !bookshelf.includes('to-read') && !bookshelf.includes('reading');
+                        })
+                        .map(row => ({
                         title: row['Title'] || '',
                         author: row['Author'] || '',
                         pubYear: row['Original Publication Year'] || '',
