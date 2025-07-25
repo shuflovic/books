@@ -4,37 +4,37 @@ function loadBooks() {
     fetch('goodreads_export.csv')
         .then(response => response.text())
         .then(data => {
-            // Parse CSV data
-            const rows = data.split('\n').slice(1); // Skip header row
-            const books = rows.map(row => {
-                // Simple CSV parsing (assumes no commas in fields)
-                const cols = row.split(',');
-                return {
-                    title: cols[1], // Title is usually in column 2
-                    author: cols[2], // Author is usually in column 3
-                    pubYear: cols[5], // Publication Year is usually in column 6
-                    dateRead: cols[8] ? new Date(cols[8]).getFullYear() : '' // Date Read is usually in column 9
-                };
-            });
+            // Parse CSV data with Papa Parse
+            Papa.parse(data, {
+                header: true, // Use first row as headers
+                skipEmptyLines: true, // Skip empty lines
+                complete: function(results) {
+                    const books = results.data.map(row => ({
+                        title: row['Title'] || '', // Get Title from CSV
+                        author: row['Author'] || '', // Get Author from CSV
+                        pubYear: row['Publication Year'] || '', // Get Publication Year
+                        dateRead: row['Date Read'] ? new Date(row['Date Read']).getFullYear() : '' // Get Year from Date Read
+                    }));
 
-            // Get the table body
-            const tableBody = document.getElementById('booksBody');
-            
-            // Add each book to the table
-            books.forEach(book => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${book.title}</td>
-                    <td>${book.author}</td>
-                    <td>${book.pubYear}</td>
-                    <td>${book.dateRead}</td>
-                `;
-                tableBody.appendChild(row);
+                    // Get the table body
+                    const tableBody = document.getElementById('booksBody');
+                    
+                    // Add each book to the table
+                    books.forEach(book => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${book.title}</td>
+                            <td>${book.author}</td>
+                            <td>${book.pubYear}</td>
+                            <td>${book.dateRead}</td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                }
             });
         })
         .catch(error => console.error('Error loading CSV:', error));
 }
 
 // Load books when the page loads
-window.onload = loadBooks;
 window.onload = loadBooks;
