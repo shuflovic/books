@@ -56,3 +56,18 @@ tr:hover {
 .sorted-desc::after {
     content: '↓';
 }
+
+/* Filter input styling */
+.filter-container {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#filterInput {
+    padding: 8px;
+    width: 300px;
+    max-width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
