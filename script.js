@@ -12,7 +12,7 @@ function loadBooks() {
                     const books = results.data.map(row => ({
                         title: row['Title'] || '', // Get Title from CSV
                         author: row['Author'] || '', // Get Author from CSV
-                        pubYear: row['Publication Year'] || '', // Get Publication Year
+                        pubYear: row['Original Publication Year'] || '', // Get Publication Year
                         dateRead: row['Date Read'] ? new Date(row['Date Read']).getFullYear() : '' // Get Year from Date Read
                     }));
 
