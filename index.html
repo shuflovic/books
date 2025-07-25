@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Danielkina kniznica</title>
+    <title>B O O K S</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>My Reading List</h1>
+    <div class="button-container">
+        <button class="library-btn active" onclick="loadLibrary('pavel')">Pavel</button>
+        <button class="library-btn" onclick="loadLibrary('daniela')">Daniela</button>
+        <button class="library-btn" onclick="loadLibrary('library')">Library</button>
+    </div>
     <div class="filter-container">
-        <input type="text" id="filterInput" placeholder="Search in title ..." oninput="filterBooks()">
+        <input type="text" id="filterInput" placeholder="Filter by title or author..." oninput="filterBooks()">
     </div>
     <table id="booksTable">
         <thead>
@@ -26,7 +31,5 @@
     <script src="script.js"></script>
     <script src="sort.js"></script>
     <script src="filter.js"></script>
-    
-    
 </body>
 </html>
