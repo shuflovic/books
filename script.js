@@ -49,7 +49,7 @@ function loadLibrary(library) {
                         title: row['Title'] || '',
                         author: row['Author'] || '',
                         pubYear: row['Original Publication Year'] || '',
-                        dateRead: row['Date Read'] ? new Date(row['Date Read']).getFullYear() : ''
+                        dateRead: row['Bookshelves with positions'] ? new Date(row['Date Read']).getFullYear() : ''
                     }));
                     // Reset filter input
                     document.getElementById('filterInput').value = '';
