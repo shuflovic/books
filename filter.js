@@ -7,7 +7,9 @@ function filterBooks() {
     
     // Filter books by title
     filteredBooks = books.filter(book => 
-        book.title.toLowerCase().includes(input)
+        book.title.toLowerCase().includes(input) ||
+        book.author.toLowerCase().includes(input)
+        
     );
     
     // Update the global books array temporarily for display
